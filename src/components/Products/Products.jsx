@@ -1,12 +1,12 @@
-import { Controls } from '../Controls/Controls';
-import { ProductsList } from '../ProductsList/ProductsList';
+import { ProductFilters } from '../ProductFilter/ProductFilters';
+import { ProductList } from '../ProductList/ProductList';
 import styles from './Products.module.css';
 
 export const Products = () => {
   return (
     <div className={styles.products}>
-      <Controls />
-      <ProductsList />
+      <ProductFilters />
+      <ProductList />
     </div>
   );
 };
