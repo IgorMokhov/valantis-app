@@ -36,8 +36,12 @@ export const ProductFilters = () => {
         placeholder="Filter by brand"
         onChange={(e) => setBrand(e.target.value)}
       />
-      <button className={styles.submitBtn} type="submit">Submit</button>
-      <button className={styles.resetBtn} onClick={resetHandler}>Reset</button>
+      <button className={styles.submitBtn} type="submit">
+        Submit
+      </button>
+      <button className={styles.resetBtn} onClick={resetHandler}>
+        Reset
+      </button>
     </form>
   );
 };
