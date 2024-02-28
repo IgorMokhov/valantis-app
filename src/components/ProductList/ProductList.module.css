@@ -1,5 +1,11 @@
 .productList {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 10px;
+  row-gap: 25px;
+  column-gap: 10px;
+  margin-bottom: 50px;
+}
+
+.loader {
+  text-align: center;
 }

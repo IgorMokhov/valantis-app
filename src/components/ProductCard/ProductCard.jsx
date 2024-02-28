@@ -4,9 +4,9 @@ export const ProductCard = ({ id, product, price, brand }) => {
   return (
     <div className={styles.productCard}>
       <h6>{product}</h6>
-      <p>{id}</p>
-      <p>{price}</p>
-      <p>{brand}</p>
+      <span>{`${price} руб.`}</span>
+      <span>{brand || 'No brand'}</span>
+      <span>{id}</span>
     </div>
   );
 };

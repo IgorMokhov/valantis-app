@@ -1,14 +1,17 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { ProductCard } from '../ProductCard/ProductCard';
-import styles from './ProductList.module.css';
 import { BASE_URL, password } from '../../api/apiConfig';
 import { createAuthHash } from '../../api/auth';
+import styles from './ProductList.module.css';
 
-export const ProductList = (props) => {
-  const { products, setProducts, isLoading, setIsLoading } = props;
-  console.log(products);
-
+export const ProductList = ({
+  products,
+  setProducts,
+  isLoading,
+  setIsLoading,
+}) => {
   const getProductsIds = async () => {
+    setIsLoading(true);
     try {
       const response = await fetch(BASE_URL, {
         method: 'POST',
@@ -24,13 +27,16 @@ export const ProductList = (props) => {
         }),
       });
       const data = await response.json();
-      await getProducts(data.result);
+
+      return data.result;
     } catch (error) {
       console.log(error);
+      setIsLoading(false);
     }
   };
 
   const getProducts = async (ids) => {
+    setIsLoading(true);
     try {
       const response = await fetch(BASE_URL, {
         method: 'POST',
@@ -47,20 +53,35 @@ export const ProductList = (props) => {
       });
       const data = await response.json();
       setProducts(data.result);
+      setIsLoading(false);
     } catch (error) {
       console.log(error);
+      setIsLoading(false);
     }
   };
 
   useEffect(() => {
-    getProductsIds();
+    const fetchData = async () => {
+      const ids = await getProductsIds();
+      if (ids && ids.length > 0) {
+        await getProducts(ids);
+      }
+    };
+
+    fetchData();
   }, []);
 
   return (
-    <div className={styles.productList}>
-      {products.map((product) => (
-        <ProductCard key={product.id} {...product} />
-      ))}
-    </div>
+    <>
+      {isLoading && <h2 className={styles.loader}>Loading...</h2>}
+
+      {products && (
+        <div className={styles.productList}>
+          {products.map((product) => (
+            <ProductCard key={product.id} {...product} />
+          ))}
+        </div>
+      )}
+    </>
   );
 };

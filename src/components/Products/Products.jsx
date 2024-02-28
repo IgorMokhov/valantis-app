@@ -6,7 +6,7 @@ import styles from './Products.module.css';
 export const Products = () => {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
+  // const [error, setError] = useState(null);
 
   return (
     <div className={styles.products}>

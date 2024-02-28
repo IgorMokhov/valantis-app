@@ -1,11 +1,13 @@
 .productCard {
-  max-width: 250px;
+  max-width: 260px;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
+  justify-content: space-around;
   text-align: center;
   box-shadow: 0px 4px 20px 0px #00000014;
-  padding: 50px;
   border-radius: 16px;
+  padding: 20px;
   cursor: pointer;
   transition: all 0.3s ease;
 }
@@ -15,5 +17,10 @@
 }
 
 .productCard h6 {
-  font-size: 25px;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.productCard span {
+  margin-bottom: 10px;
 }
