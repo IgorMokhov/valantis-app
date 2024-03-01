@@ -1,7 +1,16 @@
 import { useState } from 'react';
+import {
+  getProductsByIds,
+  getProductsIdsByFilter,
+  intersectIds,
+} from '../../api/apiUtils';
 import styles from './ProductFilters.module.css';
 
-export const ProductFilters = () => {
+export const ProductFilters = ({
+  setProducts,
+  setIsLoading,
+  fetchAllProducts,
+}) => {
   const [title, setTitle] = useState('');
   const [price, setPrice] = useState('');
   const [brand, setBrand] = useState('');
@@ -10,10 +19,46 @@ export const ProductFilters = () => {
     setTitle('');
     setPrice('');
     setBrand('');
+    fetchAllProducts();
   };
 
-  const onSubmitHandler = (e) => {
+  const fetchFilteredProducts = async () => {
+    setIsLoading(true);
+
+    try {
+      let idsByTitleFilter, idsByPriceFilter, idsByBrandFilter;
+
+      if (title.trim()) {
+        idsByTitleFilter = await getProductsIdsByFilter({ title });
+      }
+
+      if (price.trim()) {
+        idsByPriceFilter = await getProductsIdsByFilter({ price });
+      }
+
+      if (brand.trim()) {
+        idsByBrandFilter = await getProductsIdsByFilter({ brand });
+      }
+
+      const intersectedIds = intersectIds(
+        idsByTitleFilter,
+        idsByPriceFilter,
+        idsByBrandFilter
+      );
+
+      const filteredProducts = await getProductsByIds(intersectedIds);
+      setProducts(filteredProducts);
+      setIsLoading(false);
+    } catch (error) {
+      console.log(error);
+      setIsLoading(false);
+    }
+  };
+
+  const onSubmitHandler = async (e) => {
     e.preventDefault();
+
+    fetchFilteredProducts();
   };
 
   return (
@@ -25,7 +70,7 @@ export const ProductFilters = () => {
         onChange={(e) => setTitle(e.target.value)}
       />
       <input
-        type="text"
+        type="number"
         value={price}
         placeholder="Filter by price"
         onChange={(e) => setPrice(e.target.value)}
@@ -37,7 +82,7 @@ export const ProductFilters = () => {
         onChange={(e) => setBrand(e.target.value)}
       />
       <button className={styles.submitBtn} type="submit">
-        Submit
+        Search
       </button>
       <button className={styles.resetBtn} onClick={resetHandler}>
         Reset
