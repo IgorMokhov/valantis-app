@@ -14,8 +14,8 @@ export const intersectIds = (...ids) => {
 // Checking for duplicate products
 export const checkUniqueProducts = (products) => {
   const checkedProducts = products.filter(
-    (item, index, array) =>
-      index === array.findIndex((el) => el['id'] === item['id'])
+    (product, index, array) =>
+      index === array.findIndex((el) => el['id'] === product['id'])
   );
 
   return checkedProducts;

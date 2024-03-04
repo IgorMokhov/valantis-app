@@ -21,6 +21,13 @@ export const Products = () => {
       }
     } catch (error) {
       console.log(error);
+
+      if (!error.isRetry) {
+        console.log('Retrying...');
+        error.isRetry = true;
+        await fetchAllProducts(); // Recursively call fetchAllProducts again
+      }
+
       setIsLoading(false);
     }
   };

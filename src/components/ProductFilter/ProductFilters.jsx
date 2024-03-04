@@ -46,6 +46,13 @@ export const ProductFilters = ({
       setIsLoading(false);
     } catch (error) {
       console.log(error);
+
+      if (!error.isRetry) {
+        console.log('Retrying...');
+        error.isRetry = true;
+        await fetchFilteredProducts(); // Recursively call fetchFilteredProducts again
+      }
+
       setIsLoading(false);
     }
   };
