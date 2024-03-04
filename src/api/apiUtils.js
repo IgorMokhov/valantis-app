@@ -1,4 +1,4 @@
-import { BASE_URL, limitProducts, password } from './apiConfig';
+import { BASE_URL, limitProducts } from './apiConfig';
 import { createAuthHash } from './auth';
 
 // Fetches a list of product IDs from the server
@@ -7,7 +7,7 @@ export const getProductsIds = async () => {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'X-Auth': createAuthHash(password),
+      'X-Auth': createAuthHash(import.meta.env.VITE_PASSWORD),
     },
     body: JSON.stringify({
       action: 'get_ids',
@@ -27,7 +27,7 @@ export const getProductsByIds = async (ids) => {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'X-Auth': createAuthHash(password),
+      'X-Auth': createAuthHash(import.meta.env.VITE_PASSWORD),
     },
     body: JSON.stringify({
       action: 'get_items',
@@ -53,7 +53,7 @@ export const getProductsIdsByFilter = async (filter) => {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'X-Auth': createAuthHash(password),
+      'X-Auth': createAuthHash(import.meta.env.VITE_PASSWORD),
     },
     body: JSON.stringify({
       action: 'filter',

@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { ProductFilters } from '../ProductFilter/ProductFilters';
 import { ProductList } from '../ProductList/ProductList';
-import styles from './Products.module.css';
 import { getProductsByIds, getProductsIds } from '../../api/apiUtils';
+import styles from './Products.module.css';
 
 export const Products = () => {
   const [products, setProducts] = useState([]);
@@ -14,8 +14,8 @@ export const Products = () => {
     try {
       const ids = await getProductsIds();
       if (ids && ids.length > 0) {
-        const products = await getProductsByIds(ids);
-        setProducts(products);
+        const fetchedProducts = await getProductsByIds(ids);
+        setProducts(fetchedProducts);
         setIsLoading(false);
       }
     } catch (error) {

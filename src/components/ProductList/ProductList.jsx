@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import { ProductCard } from '../ProductCard/ProductCard';
-import { getProductsByIds, getProductsIds } from '../../api/apiUtils';
 import styles from './ProductList.module.css';
 
 export const ProductList = ({ products, isLoading, fetchAllProducts }) => {

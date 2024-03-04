@@ -31,11 +31,9 @@ export const ProductFilters = ({
       if (title.trim()) {
         idsByTitleFilter = await getProductsIdsByFilter({ title });
       }
-
       if (price.trim()) {
         idsByPriceFilter = await getProductsIdsByFilter({ price });
       }
-
       if (brand.trim()) {
         idsByBrandFilter = await getProductsIdsByFilter({ brand });
       }
