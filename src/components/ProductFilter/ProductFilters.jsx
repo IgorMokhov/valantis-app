@@ -1,9 +1,6 @@
 import { useState } from 'react';
-import {
-  getProductsByIds,
-  getProductsIdsByFilter,
-  intersectIds,
-} from '../../api/apiUtils';
+import { getProductsByIds, getProductsIdsByFilter } from '../../api/apiUtils';
+import { checkUniqueProducts, intersectIds } from '../../utils/productsUtils';
 import styles from './ProductFilters.module.css';
 
 export const ProductFilters = ({
@@ -45,7 +42,7 @@ export const ProductFilters = ({
       );
 
       const filteredProducts = await getProductsByIds(intersectedIds);
-      setProducts(filteredProducts);
+      setProducts(checkUniqueProducts(filteredProducts));
       setIsLoading(false);
     } catch (error) {
       console.log(error);

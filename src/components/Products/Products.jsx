@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { ProductFilters } from '../ProductFilter/ProductFilters';
 import { ProductList } from '../ProductList/ProductList';
 import { getProductsByIds, getProductsIds } from '../../api/apiUtils';
+import { checkUniqueProducts } from '../../utils/productsUtils';
 import styles from './Products.module.css';
 
 export const Products = () => {
@@ -15,7 +16,7 @@ export const Products = () => {
       const ids = await getProductsIds();
       if (ids && ids.length > 0) {
         const fetchedProducts = await getProductsByIds(ids);
-        setProducts(fetchedProducts);
+        setProducts(checkUniqueProducts(fetchedProducts));
         setIsLoading(false);
       }
     } catch (error) {
