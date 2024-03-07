@@ -3,27 +3,22 @@
   display: flex;
 }
 
-.productFilters button,
 .productFilters input,
 .productFilters input::placeholder {
   font-family: 'Lato', sans-serif;
   font-size: 16px;
 }
 
-.productFilters input {
-  width: 330px;
-}
-
 .productFilters input,
 .productFilters button {
-  padding: 10px;
   margin-right: 10px;
-  border-radius: 10px;
-  border: 1px solid lightgray;
 }
 
-.productFilters button {
-  cursor: pointer;
+.productFilters input {
+  width: 330px;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid lightgray;
 }
 
 .submitBtn {

@@ -1,1 +1,11 @@
-.products {}
+.products {
+}
+
+.paginationBtns {
+  max-width: 200px;
+  margin: 0 auto 35px;
+}
+
+.paginationBtns span {
+  padding: 0 10px;
+}

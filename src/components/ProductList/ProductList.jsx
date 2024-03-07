@@ -2,10 +2,19 @@ import { useEffect } from 'react';
 import { ProductCard } from '../ProductCard/ProductCard';
 import styles from './ProductList.module.css';
 
-export const ProductList = ({ products, isLoading, fetchAllProducts }) => {
+export const ProductList = ({
+  products,
+  currentPage,
+  isLoading,
+  isFiltered,
+  fetchAllProducts,
+}) => {
+  // Call fetchAllProducts only if filters are not active
   useEffect(() => {
-    fetchAllProducts();
-  }, []);
+    if (!isFiltered) {
+      fetchAllProducts();
+    }
+  }, [currentPage]);
 
   return (
     <>

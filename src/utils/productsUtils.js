@@ -20,3 +20,8 @@ export const checkUniqueProducts = (products) => {
 
   return checkedProducts;
 };
+
+// calculate offset
+export const getOffset = (currentPage, limitProducts) => {
+  return (currentPage - 1) * limitProducts;
+};

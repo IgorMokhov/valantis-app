@@ -1,11 +1,21 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { getProductsByIds, getProductsIdsByFilter } from '../../api/apiUtils';
-import { checkUniqueProducts, intersectIds } from '../../utils/productsUtils';
+import {
+  checkUniqueProducts,
+  getOffset,
+  intersectIds,
+} from '../../utils/productsUtils';
+import { CustomButton } from '../../UI/CustomButton/CustomButton';
+import { limitProducts } from '../../api/apiConfig';
 import styles from './ProductFilters.module.css';
 
 export const ProductFilters = ({
+  currentPage,
+  isFiltered,
   setProducts,
   setIsLoading,
+  setCurrentPage,
+  setIsFiltered,
   fetchAllProducts,
 }) => {
   const [title, setTitle] = useState('');
@@ -16,15 +26,18 @@ export const ProductFilters = ({
     setTitle('');
     setPrice('');
     setBrand('');
+    setIsFiltered(false); // Reset the flag when resetting filters
+    setCurrentPage(1);
     fetchAllProducts();
   };
 
   const fetchFilteredProducts = async () => {
     setIsLoading(true);
+    setIsFiltered(true); // Set the flag when filters are applied
 
     try {
       let idsByTitleFilter, idsByPriceFilter, idsByBrandFilter;
-
+      // Getting filtered identifiers for each filter
       if (title.trim()) {
         idsByTitleFilter = await getProductsIdsByFilter({ title });
       }
@@ -41,7 +54,11 @@ export const ProductFilters = ({
         idsByBrandFilter
       );
 
-      const filteredProducts = await getProductsByIds(intersectedIds);
+      const offset = getOffset(currentPage, limitProducts);
+      // Fetch filteredProducts based on the calculated offset and limit for pagination
+      const filteredProducts = await getProductsByIds(
+        intersectedIds.slice(offset, offset + limitProducts)
+      );
       setProducts(checkUniqueProducts(filteredProducts));
       setIsLoading(false);
     } catch (error) {
@@ -50,7 +67,7 @@ export const ProductFilters = ({
       if (!error.isRetry) {
         console.log('Retrying...');
         error.isRetry = true;
-        await fetchFilteredProducts(); // Recursively call fetchFilteredProducts again
+        await fetchFilteredProducts(); // // Recursive call on error
       }
 
       setIsLoading(false);
@@ -59,9 +76,16 @@ export const ProductFilters = ({
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
-
+    setCurrentPage(1);
     fetchFilteredProducts();
   };
+
+  // Call fetchFilteredProducts only if filters are active
+  useEffect(() => {
+    if (isFiltered) {
+      fetchFilteredProducts();
+    }
+  }, [currentPage]);
 
   return (
     <form className={styles.productFilters} onSubmit={onSubmitHandler}>
@@ -83,12 +107,12 @@ export const ProductFilters = ({
         placeholder="Filter by brand"
         onChange={(e) => setBrand(e.target.value)}
       />
-      <button className={styles.submitBtn} type="submit">
+      <CustomButton className={styles.submitBtn} type="submit">
         Search
-      </button>
-      <button className={styles.resetBtn} onClick={resetHandler}>
+      </CustomButton>
+      <CustomButton className={styles.resetBtn} onClick={resetHandler}>
         Reset
-      </button>
+      </CustomButton>
     </form>
   );
 };
