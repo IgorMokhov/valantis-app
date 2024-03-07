@@ -21,11 +21,19 @@ export const ProductFilters = ({
   const [title, setTitle] = useState('');
   const [price, setPrice] = useState('');
   const [brand, setBrand] = useState('');
+  const [error, setError] = useState('');
+
+  const validateFilters = (title, price, brand) => {
+    if (!title && !price && !brand) {
+      return 'At least one filter must be filled';
+    }
+  };
 
   const resetHandler = () => {
     setTitle('');
     setPrice('');
     setBrand('');
+    setError('');
     setIsFiltered(false); // Reset the flag when resetting filters
     setCurrentPage(1);
     fetchAllProducts();
@@ -33,6 +41,7 @@ export const ProductFilters = ({
 
   const fetchFilteredProducts = async () => {
     setIsLoading(true);
+    setError('');
     setIsFiltered(true); // Set the flag when filters are applied
 
     try {
@@ -76,6 +85,13 @@ export const ProductFilters = ({
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
+
+    const errorFilters = validateFilters(title, price, brand);
+    if (errorFilters) {
+      setError(errorFilters);
+      return;
+    }
+
     setCurrentPage(1);
     fetchFilteredProducts();
   };
@@ -107,6 +123,7 @@ export const ProductFilters = ({
         placeholder="Filter by brand"
         onChange={(e) => setBrand(e.target.value)}
       />
+      <span className={styles.error}>{error}</span>
       <CustomButton className={styles.submitBtn} type="submit">
         Search
       </CustomButton>

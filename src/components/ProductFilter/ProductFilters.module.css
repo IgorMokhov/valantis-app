@@ -1,6 +1,7 @@
 .productFilters {
   margin-bottom: 30px;
   display: flex;
+  position: relative;
 }
 
 .productFilters input,
@@ -19,6 +20,13 @@
   padding: 10px;
   border-radius: 10px;
   border: 1px solid lightgray;
+}
+
+.error {
+  position: absolute;
+  color: red;
+  top: 45px;
+  left: 10px;
 }
 
 .submitBtn {
