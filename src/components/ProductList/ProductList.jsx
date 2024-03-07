@@ -5,6 +5,7 @@ import styles from './ProductList.module.css';
 export const ProductList = ({
   products,
   currentPage,
+  totalProductsCount,
   isLoading,
   isFiltered,
   fetchAllProducts,
@@ -18,8 +19,20 @@ export const ProductList = ({
 
   return (
     <>
+      {!products.length && !isLoading && (
+        <p className={styles.productListInfo}>No products found</p>
+      )}
+
+      {!!totalProductsCount && !isLoading && (
+        <p className={styles.productListInfo}>
+          {`Found ${totalProductsCount} ${
+            totalProductsCount > 1 ? 'products' : 'product'
+          }`}
+        </p>
+      )}
+
       {isLoading ? (
-        <h2 className={styles.loader}>Loading...</h2>
+        <p className={styles.loader}>Loading...</p>
       ) : (
         <div className={styles.productList}>
           {products.map((product) => (

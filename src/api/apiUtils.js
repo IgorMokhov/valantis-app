@@ -65,3 +65,21 @@ export const getProductsByIds = async (ids) => {
 
   return data.result;
 };
+
+// Get total count all products
+export const getTotalProductsCount = async () => {
+  const response = await fetch(BASE_URL, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-Auth': createAuthHash(import.meta.env.VITE_PASSWORD),
+    },
+    body: JSON.stringify({
+      action: 'get_ids',
+    }),
+  });
+  const data = await response.json();
+  const uniqueIds = new Set(data.result); // Checking for duplicate ids
+
+  return uniqueIds.size;
+};

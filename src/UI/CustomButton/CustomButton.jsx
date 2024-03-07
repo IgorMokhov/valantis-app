@@ -5,12 +5,14 @@ export const CustomButton = ({
   onClick,
   children,
   type = 'button',
+  disabled = false,
 }) => {
   return (
     <button
       className={`${styles.customButton} ${className}`}
       onClick={onClick}
       type={type}
+      disabled={disabled}
     >
       {children}
     </button>

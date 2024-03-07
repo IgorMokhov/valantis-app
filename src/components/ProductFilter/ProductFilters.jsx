@@ -12,16 +12,18 @@ import styles from './ProductFilters.module.css';
 export const ProductFilters = ({
   currentPage,
   isFiltered,
+  error,
+  setError,
   setProducts,
   setIsLoading,
   setCurrentPage,
   setIsFiltered,
+  setTotalProductsCount,
   fetchAllProducts,
 }) => {
   const [title, setTitle] = useState('');
   const [price, setPrice] = useState('');
   const [brand, setBrand] = useState('');
-  const [error, setError] = useState('');
 
   const validateFilters = (title, price, brand) => {
     if (!title && !price && !brand) {
@@ -62,6 +64,9 @@ export const ProductFilters = ({
         idsByPriceFilter,
         idsByBrandFilter
       );
+
+      // Update the total number of products based on unique identifiers
+      setTotalProductsCount(new Set(intersectedIds).size); 
 
       const offset = getOffset(currentPage, limitProducts);
       // Fetch filteredProducts based on the calculated offset and limit for pagination

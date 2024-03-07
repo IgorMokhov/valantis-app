@@ -1,9 +1,12 @@
 .products {
+  display: flex;
+  flex-direction: column;
+  min-height: 87vh;
 }
 
 .paginationBtns {
   max-width: 200px;
-  margin: 0 auto 35px;
+  margin: auto auto 35px;
 }
 
 .paginationBtns span {
