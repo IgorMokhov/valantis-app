@@ -8,6 +8,7 @@ import {
 import { CustomButton } from '../../UI/CustomButton/CustomButton';
 import { limitProducts } from '../../api/apiConfig';
 import styles from './ProductFilters.module.css';
+import { CustomInput } from '../../UI/CustomInput/CustomInput';
 
 export const ProductFilters = ({
   currentPage,
@@ -27,7 +28,7 @@ export const ProductFilters = ({
 
   const validateFilters = (title, price, brand) => {
     if (!title && !price && !brand) {
-      return 'At least one filter must be filled';
+      return 'At least one filter must be filled!';
     }
   };
 
@@ -66,7 +67,7 @@ export const ProductFilters = ({
       );
 
       // Update the total number of products based on unique identifiers
-      setTotalProductsCount(new Set(intersectedIds).size); 
+      setTotalProductsCount(new Set(intersectedIds).size);
 
       const offset = getOffset(currentPage, limitProducts);
       // Fetch filteredProducts based on the calculated offset and limit for pagination
@@ -110,19 +111,22 @@ export const ProductFilters = ({
 
   return (
     <form className={styles.productFilters} onSubmit={onSubmitHandler}>
-      <input
+      <CustomInput
+        id="search"
         type="text"
         value={title}
         placeholder="Filter by title"
         onChange={(e) => setTitle(e.target.value)}
       />
-      <input
+      <CustomInput
+        id="price"
         type="number"
         value={price}
         placeholder="Filter by price"
         onChange={(e) => setPrice(e.target.value)}
       />
-      <input
+      <CustomInput
+        id="brand"
         type="text"
         value={brand}
         placeholder="Filter by brand"
