@@ -24,7 +24,7 @@ Test task for the position of "Frontend Developer" (Valantis)
 - Loader displayed during each load.
 
 ### Security
-- API_KEY is stored in a separate .env file.
+- PASSWORD is stored in a separate .env file.
 
 ### Layout
 - Responsive design up to 320px.
