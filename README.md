@@ -1,7 +1,7 @@
 # Valantis App
 
 ![demo](https://github.com/IgorMokhov/valantis-app/assets/115712538/3330e889-55c4-43f1-b2e3-8362320f1749)
-[Deployed Project](valantis-app-zeta.vercel.app/)
+[Deployed Project](https://valantis-app-black.vercel.app/)
 
 ## Introduction
 
