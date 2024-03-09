@@ -7,8 +7,8 @@ import {
 } from '../../utils/productsUtils';
 import { CustomButton } from '../../UI/CustomButton/CustomButton';
 import { limitProducts } from '../../api/apiConfig';
-import styles from './ProductFilters.module.css';
 import { CustomInput } from '../../UI/CustomInput/CustomInput';
+import styles from './ProductFilters.module.css';
 
 export const ProductFilters = ({
   currentPage,
