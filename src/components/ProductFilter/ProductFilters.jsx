@@ -112,6 +112,7 @@ export const ProductFilters = ({
   return (
     <form className={styles.productFilters} onSubmit={onSubmitHandler}>
       <CustomInput
+        className={styles.filter}
         id="search"
         type="text"
         value={title}
@@ -119,6 +120,7 @@ export const ProductFilters = ({
         onChange={(e) => setTitle(e.target.value)}
       />
       <CustomInput
+        className={styles.filter}
         id="price"
         type="number"
         value={price}
@@ -126,19 +128,22 @@ export const ProductFilters = ({
         onChange={(e) => setPrice(e.target.value)}
       />
       <CustomInput
+        className={styles.filter}
         id="brand"
         type="text"
         value={brand}
         placeholder="Filter by brand"
         onChange={(e) => setBrand(e.target.value)}
       />
+      <div className={styles.filtersBtns}>
+        <CustomButton className={styles.submitBtn} type="submit">
+          Search
+        </CustomButton>
+        <CustomButton className={styles.resetBtn} onClick={resetHandler}>
+          Reset
+        </CustomButton>
+      </div>
       <span className={styles.error}>{error}</span>
-      <CustomButton className={styles.submitBtn} type="submit">
-        Search
-      </CustomButton>
-      <CustomButton className={styles.resetBtn} onClick={resetHandler}>
-        Reset
-      </CustomButton>
     </form>
   );
 };

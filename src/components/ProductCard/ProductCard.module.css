@@ -5,7 +5,8 @@
   flex-direction: column;
   justify-content: space-around;
   text-align: center;
-  box-shadow: 0px 4px 20px 0px #00000014;
+  box-shadow: var(--shadow);
+  background-color: white;
   border-radius: 16px;
   padding: 20px;
   cursor: pointer;
@@ -18,9 +19,15 @@
 
 .productCard h6 {
   font-size: 20px;
+  font-weight: 400;
   margin-bottom: 10px;
 }
 
 .productCard span {
   margin-bottom: 10px;
+}
+
+.productCard span:last-of-type {
+  font-size: 18px;
+  font-weight: 300;
 }

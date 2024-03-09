@@ -7,13 +7,12 @@ export const CustomInput = ({
   placeholder,
   onChange,
   className,
-  id
+  id,
 }) => {
   return (
-    <label htmlFor={id} className={styles.label}>
+    <label htmlFor={id} className={`${styles.label} ${className}`}>
       <img src={searchIcon} alt="searchIcon" />
       <input
-        className={className}
         id={id}
         type={type}
         value={value}

@@ -6,7 +6,7 @@
 .label input,
 .label input::placeholder {
   font-family: 'Lato', sans-serif;
-  color: var(--search-tex);
+  color: var(--search-text);
   line-height: 1.5;
   font-size: 20px;
   font-weight: 300;
@@ -19,7 +19,6 @@
 }
 
 .label input {
-  width: 330px;
   height: 60px;
   padding: 10px 10px 10px 60px;
   border-radius: 15px;

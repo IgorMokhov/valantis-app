@@ -30,3 +30,8 @@ body {
 html {
   overflow-y: scroll;
 }
+
+label,
+input {
+  width: 100%;
+}

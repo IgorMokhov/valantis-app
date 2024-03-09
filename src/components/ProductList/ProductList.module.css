@@ -8,7 +8,25 @@
 
 .loader,
 .productListInfo {
-  font-size: 30px;
+  font-size: 28px;
   text-align: center;
   margin-bottom: 20px;
+}
+
+@media (max-width: 1120px) {
+  .productList {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 840px) {
+  .productList {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 580px) {
+  .productList {
+    grid-template-columns: repeat(1, 1fr);
+  }
 }
